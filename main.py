@@ -1,52 +1,49 @@
+"""
+Launcher: choose which task block to run.
+You can also run each block separately from its folder:
+  cd exercise_block_1_basics && python tasks.py
+  cd exercise_block_2_list_dict && python tasks.py
+"""
+
 import importlib
 import sys
+from pathlib import Path
+
 import questionary
 
-TASKS = [
-    (1, "Check if the user's number is even or odd.", "task_1"),
-    (
-        2,
-        "Check if the user's number is greater than 0, less than 0, or equal to 0.",
-        "task_2",
-    ),
-    (
-        3,
-        "Ask for an exam score (0–100) and display the grade: 90–100 → 5, 80–89 → 4, 70–79 → 3, 60–69 → 2, below 60 → 1.",
-        "task_3",
-    ),
-    (4, "Display numbers from 0 to 100.", "task_4"),
-    (5, "Display all prime numbers from 1 to 100.", "task_5"),
-    (6, "Display the sum of all even numbers in the range 1–100.", "task_6"),
-    (7, "Compute the area of a rectangle (user provides side lengths).", "task_7"),
-    (8, "Check if the given sentence is valid (ends with a period).", "task_8"),
-    (
-        9,
-        "Get three integers from the user and sort them from smallest to largest.",
-        "task_9",
-    ),
-    (
-        10,
-        "Guessing game — pick a random number 1–100, ask the user to guess; after each try show if the guess is higher or lower; end when correct.",
-        "task_10",
-    ),
+BLOCKS = [
+    ("Block 1: Basics (tasks 1–10)", "exercise_block_1_basics"),
+    ("Block 2: List & Dict (tasks 1–8)", "exercise_block_2_list_dict"),
 ]
 
-for i, (num, desc, mod_name) in enumerate(TASKS):
-    prefix = "\n" if i > 0 else ""
-    print(f"{prefix}Task {num}: {desc}")
-    run = questionary.select(
-        "Do you want to run this task?", choices=["Yes", "No"]
-    ).ask()
+choice = questionary.select(
+    "Which task block do you want to run?",
+    choices=[c[0] for c in BLOCKS] + ["Exit"],
+).ask()
 
-    if run == "Yes":
-        importlib.import_module(mod_name)
-    else:
-        choice = questionary.select(
-            "Proceed to next task or exit?", choices=["Next", "Exit"]
-        ).ask()
-        if choice == "Exit":
-            print("Goodbye!\n")
-            sys.exit(0)
+if choice == "Exit":
+    print("Goodbye!\n")
+    sys.exit(0)
 
+block_dir_name = next(c[1] for c in BLOCKS if c[0] == choice)
+project_root = Path(__file__).resolve().parent
+block_dir = project_root / block_dir_name
+main_path = block_dir / "tasks.py"
 
-print("\nAll tasks done.")
+if not main_path.exists():
+    print(f"Not found: {main_path}\n")
+    sys.exit(1)
+
+# Run the block's main.py — add the block folder to the start of sys.path
+# so that task_1, task_2, etc. are imported from that folder
+sys.path.insert(0, str(block_dir))
+with open(main_path) as f:
+    code = compile(f.read(), main_path, "exec")
+    exec_globals = {
+        "__name__": "__tasks__",
+        "__file__": str(main_path),
+        "importlib": importlib,
+        "sys": sys,
+        "questionary": questionary,
+    }
+    exec(code, exec_globals)
