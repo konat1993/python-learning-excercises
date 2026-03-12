@@ -1,8 +1,8 @@
 """
 Launcher: choose which task block to run.
 You can also run each block separately from its folder:
-  cd excercise_block_1_basics && python tasks.py
-  cd excercise_block_2_list_dict && python tasks.py
+  cd exercise_block_1_basics && python tasks.py
+  cd exercise_block_2_list_dict && python tasks.py
 """
 
 import importlib
@@ -12,8 +12,8 @@ from pathlib import Path
 import questionary
 
 BLOCKS = [
-    ("Block 1: Basics (tasks 1–10)", "excercise_block_1_basics"),
-    ("Block 2: List & Dict (tasks 1–8)", "excercise_block_2_list_dict"),
+    ("Block 1: Basics (tasks 1–10)", "exercise_block_1_basics"),
+    ("Block 2: List & Dict (tasks 1–8)", "exercise_block_2_list_dict"),
 ]
 
 choice = questionary.select(
