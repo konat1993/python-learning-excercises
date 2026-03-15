@@ -36,11 +36,17 @@ def read_list():
 
 
 def add_item(item_to_add, content):
-    if (item_to_add.lower() + "\n") in [item.lower() for item in content]:
+    if (
+        item_to_add.lower().strip() + "\n"
+        and
+        item_to_add.lower().strip()
+    ) in [item.lower().strip() for item in content]:
         return False
     try:
         with open(SHOPPING_LIST_PATH, "a", encoding="utf-8") as f:
-            f.write(item_to_add + "\n")
+            has_last_item_new_line = content[len(content) - 2].endswith("\n")
+            f.write(
+                "\n" + (item_to_add if has_last_item_new_line else item_to_add + "\n"))
             f.flush()
         return True
     except OSError as e:
