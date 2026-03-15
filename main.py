@@ -4,6 +4,7 @@ You can also run each block separately from its folder:
   cd exercise_block_1_basics && python tasks.py
   cd exercise_block_2_list_dict && python tasks.py
   cd exercise_block_3_functions && python tasks.py
+  cd exercise_4_shopping_list && python tasks.py
 """
 
 import importlib
@@ -16,6 +17,7 @@ BLOCKS = [
     ("Block 1: Basics (tasks 1–10)", "exercise_block_1_basics"),
     ("Block 2: List & Dict (tasks 1–8)", "exercise_block_2_list_dict"),
     ("Block 3: Functions (tasks 1–17)", "exercise_block_3_functions"),
+    ("Exercise 4: Shopping list (task 1)", "exercise_4_shopping_list"),
 ]
 
 choice = questionary.select(
