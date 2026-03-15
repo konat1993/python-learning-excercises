@@ -1,7 +1,3 @@
-import importlib
-import sys
-import questionary
-
 TASKS = [
     (1, "Generate 10 random numbers and calculate the sum of them.", "task_1"),
     (2, "Print all words that have more than 5 letters.", "task_2"),
@@ -16,23 +12,3 @@ TASKS = [
     (7, "Sort the countries by country name and print them.", "task_7"),
     (8, "Count the number of occurrences of each word in the sentence.", "task_8"),
 ]
-
-for i, (num, desc, mod_name) in enumerate(TASKS):
-    prefix = "\n" if i > 0 else ""
-    print(f"{prefix}Task {num}: {desc}")
-    run = questionary.select(
-        "Do you want to run this task?", choices=["Yes", "No"]
-    ).ask()
-
-    if run == "Yes":
-        importlib.import_module(mod_name)
-    else:
-        choice = questionary.select(
-            "Proceed to next task or exit?", choices=["Next", "Exit"]
-        ).ask()
-        if choice == "Exit":
-            print("Goodbye!\n")
-            sys.exit(0)
-
-
-print("\nAll tasks done.")

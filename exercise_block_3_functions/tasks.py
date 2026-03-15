@@ -1,7 +1,3 @@
-import importlib
-import sys
-import questionary
-
 TASKS = [
     (1, "Add two numbers and return their sum.", "task_1"),
     (2, "Check if a number is even (True) or odd (False).", "task_2"),
@@ -57,24 +53,4 @@ TASKS = [
         "task_17",
     ),
 ]
-
-for i, (num, desc, mod_name) in enumerate(TASKS):
-    prefix = "\n" if i > 0 else ""
-    print(f"{prefix}Task {num}: {desc}")
-    run = questionary.select(
-        "Do you want to run this task?", choices=["Yes", "No"]
-    ).ask()
-
-    if run == "Yes":
-        importlib.import_module(mod_name)
-    else:
-        choice = questionary.select(
-            "Proceed to next task or exit?", choices=["Next", "Exit"]
-        ).ask()
-        if choice == "Exit":
-            print("Goodbye!\n")
-            sys.exit(0)
-
-
-print("\nAll tasks done.")
 
