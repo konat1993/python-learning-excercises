@@ -165,7 +165,6 @@ def main() -> None:
     while True:
         answer = questionary.select(
             "What would you like to do?", choices=MAIN_MENU).ask()
-        print(answer)
         if answer is None or answer == "EXIT":
             sys.exit()
         if answer in ACTIONS:

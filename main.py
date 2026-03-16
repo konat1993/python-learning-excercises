@@ -11,6 +11,7 @@ BLOCKS = [
     ("Exercise 4: Shopping list (task 1)", "exercise_4_shopping_list"),
     ("Exercise 5: Log analysis (task 1)", "exercise_5_log_analysis"),
     ("Exercise 6: Video Library management", "exercise_6_videos_library"),
+    ("Exercise 7: Phone database management (task 1)", "exercise_7_phone_shop"),
 ]
 
 choice = questionary.select(
