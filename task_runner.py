@@ -25,7 +25,14 @@ def run_tasks(tasks):
         ).ask()
 
         if run == "Yes":
-            importlib.import_module(mod_name)
+            module = importlib.import_module(mod_name)
+            module_main = getattr(module, "main", None)
+            if callable(module_main):
+                try:
+                    module_main()
+                except Exception as e:
+                    print(f"Task failed with error: {e}")
+                    print("Continuing to the next task.")
         else:
             choice = questionary.select(
                 "Proceed to next task or exit?", choices=["Next", "Exit"]
