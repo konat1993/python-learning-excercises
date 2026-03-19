@@ -5,14 +5,14 @@ from pathlib import Path
 import questionary
 
 BLOCKS = [
-    ("Block 1: Basics (tasks 1–10)", "exercise_1_basics"),
-    ("Block 2: List & Dict (tasks 1–8)", "exercise_2_list_dict"),
-    ("Block 3: Functions (tasks 1–17)", "exercise_3_functions"),
+    ("Block 1: Basics (tasks 1-10)", "exercise_1_basics"),
+    ("Block 2: List & Dict (tasks 1-8)", "exercise_2_list_dict"),
+    ("Block 3: Functions (tasks 1-17)", "exercise_3_functions"),
     ("Exercise 4: Shopping list (task 1)", "exercise_4_shopping_list"),
     ("Exercise 5: Log analysis (task 1)", "exercise_5_log_analysis"),
     ("Exercise 6: Video Library management", "exercise_6_videos_library"),
     ("Exercise 7: Phone database management (task 1)", "exercise_7_phone_shop"),
-    ("Exercise 8: Internal modules (tasks 1–20)", "exercise_8_internal_modules"),
+    ("Exercise 8: Internal modules (tasks 1-20)", "exercise_8_internal_modules"),
 ]
 
 choice = questionary.select(
