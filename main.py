@@ -13,6 +13,7 @@ BLOCKS = [
     ("Exercise 6: Video Library management", "exercise_6_videos_library"),
     ("Exercise 7: Phone database management (task 1)", "exercise_7_phone_shop"),
     ("Exercise 8: Internal modules (tasks 1-20)", "exercise_8_internal_modules"),
+    ("Exercise 9: Advanced Python (tasks 1-30)", "exercise_9_advanced_python"),
 ]
 
 choice = questionary.select(
